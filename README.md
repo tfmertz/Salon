@@ -18,7 +18,7 @@ The user of the app would be a hair salon owner. The app allows the user to inpu
 
 ##### Database
 
-Import the hair_salon.sql file into your postgres
+Import the hair_salon.sql and hair_salon_test.sql file into your postgres
 
 **If this fails, use the following commands:**
 
