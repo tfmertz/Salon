@@ -21,6 +21,12 @@
         return $app['twig']->render('homepage.twig', array('stylist_array' => Stylist::getAll()));
     });
 
+    $app->get('/view_stylist/{id}', function($id) use ($app) {
+        $new_stylist = Stylist::find($id);
+        $clients = $new_stylist->getClients();
+        return $app['twig']->render('view_stylist.twig', array('stylist' => $new_stylist, 'client_array' => $clients));
+    });
+
     $app->post('delete_all', function() use ($app) {
         Stylist::deleteAll();
         return $app['twig']->render('homepage.twig', array('stylist_array' => []));

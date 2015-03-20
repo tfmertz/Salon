@@ -22,7 +22,7 @@
 
     <div>
       {% for stylist in stylist_array %}
-        <p>{{ stylist.getName() }}</p>
+        <p><a href="/view_stylist/{{ stylist.getId() }}">{{ stylist.getName() }}</a></p>
       {% endfor %}
 
       {% if stylist_array is empty %}

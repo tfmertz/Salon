@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>{{ stylist.getName() }}</title>
+  </head>
+  <body>
+    <h1>{{ stylist.getName() }}</h1>
+
+    <p>
+      <a href="/">Home</a> &gt; Stylist {{ stylist.getName() }}
+    </p>
+
+    <div>
+      <form action="/add_client" method="post">
+        <label for="client">Enter Client</label>
+        <input type="text" name="client" id="client">
+
+        <button type="submit">Add a Client</button>
+      </form>
+
+    </div>
+
+    <hr>
+
+    <div>
+      <h3>{{ stylist.getName() }}&apos;s existing clients</h3>
+
+      {% for client in client_array %}
+        <p>
+          {{ client.getName() }}
+        </p>
+      {% endfor %}
+
+      {% if client_array is empty %}
+
+        <p>
+          <b>No clients exist</b>
+        </p>
+
+      {% endif %}
+    </div>
+  </body>
+</html>
