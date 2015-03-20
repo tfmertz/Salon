@@ -42,8 +42,33 @@
         {
             $this->stylist_id = $new_stylist_id;
         }
+
+        function save()
+        {
+            $statement = $GLOBALS['DB']->query("INSERT INTO clients (client, stylist_id) VALUES ('{$this->getName()}', {$this->getStylistId()}) RETURNING id;");
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $this->setId($result['id']);
+        }
+
+        static function getAll()
+        {
+            $rows = $GLOBALS['DB']->query("SELECT * FROM clients;");
+            $clients = array();
+
+            foreach($rows as $row)
+            {
+                $id = $row['id'];
+                $name = $row['client'];
+                $stylist_id = $row['stylist_id'];
+                $new_client = new Client($name, $stylist_id, $id);
+                array_push($clients, $new_client);
+            }
+            return $clients;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM clients *;");
+        }
     }
-
-
-
- ?>
+?>
