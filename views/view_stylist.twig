@@ -12,11 +12,11 @@
 
     <h1>Client List for {{ stylist.getName() }}</h1>
     <div>
-      <form action="/add_client" method="post">
+      <form action="/stylists/add_client" method="post">
         <input type="hidden" name="stylist_id" value="{{ stylist.getId() }}">
 
         <label for="client">Enter Client</label>
-        <input type="text" name="client" id="client">
+        <input type="text" name="client" id="client" required>
 
         <button type="submit">Add a Client</button>
       </form>
@@ -43,7 +43,13 @@
     </div>
 
     <div>
-      <form action="/delete_stylist" method="post">
+      <p>
+        <a href="/stylists/{{ stylist.getId() }}/edit">Edit stylist {{ stylist.getName() }}</a>
+      </p>
+    </div>
+
+    <div>
+      <form action="/stylists/delete" method="post">
         <input type="hidden" name="stylist_id" value="{{ stylist.getId() }}">
 
         <button type="submit">Delete stylist {{ stylist.getName() }}</button>

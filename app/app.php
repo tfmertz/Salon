@@ -11,6 +11,8 @@
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/../views'));
 
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
 
     $app->get('/', function() use ($app) {
         return $app['twig']->render('homepage.twig', array('stylist_array' => Stylist::getAll()));
@@ -27,13 +29,20 @@
         return $app['twig']->render('homepage.twig', array('stylist_array' => Stylist::getAll()));
     });
 
-    $app->get('/view_stylist/{id}', function($id) use ($app) {
+    $app->post('delete_stylist', function() use ($app) {
+        $stylist_id = pg_escape_string($_POST['stylist_id']);
+        $new_stylist = Stylist::find($stylist_id);
+        $new_stylist->delete();
+        return $app['twig']->render('homepage.twig', array('stylist_array' => Stylist::getAll()));
+    });
+
+    $app->get('/stylists/{id}', function($id) use ($app) {
         $new_stylist = Stylist::find($id);
         $clients = $new_stylist->getClients();
         return $app['twig']->render('view_stylist.twig', array('stylist' => $new_stylist, 'client_array' => $clients));
     });
 
-    $app->post('/add_client', function() use ($app) {
+    $app->post('/stylists/add_client', function() use ($app) {
         $stylist_id = pg_escape_string($_POST['stylist_id']);
         $new_client = new Client(pg_escape_string($_POST['client']), $stylist_id);
         $new_client->save();
@@ -42,12 +51,19 @@
         return $app['twig']->render('view_stylist.twig', array('stylist' => $new_stylist, 'client_array' => $clients));
     });
 
-    $app->post('delete_stylist', function() use ($app) {
-        $stylist_id = pg_escape_string($_POST['stylist_id']);
-        $new_stylist = Stylist::find($stylist_id);
-        $new_stylist->delete();
-        return $app['twig']->render('homepage.twig', array('stylist_array' => Stylist::getAll()));
+    $app->get('/stylists/{id}/edit', function($id) use ($app) {
+        $new_stylist = Stylist::find($id);
+
+        return $app['twig']->render('edit_stylist.twig', array('stylist' => $new_stylist));
     });
+
+    $app->patch('/stylists/{id}', function($id) use($app) {
+        $new_stylist = Stylist::find($id);
+        $new_stylist->update(pg_escape_string($_POST['name']));
+        return $app['twig']->render('view_stylist.twig', array('stylist' => $new_stylist));
+    });
+
+
 
 
     return $app;

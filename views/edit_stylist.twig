@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Edit {{ stylist.getName() }}</title>
+  </head>
+  <body>
+
+    <p>
+      <a href="/">Home</a> &gt; <a href="/view_stylist/{{ stylist.getId() }}">{{ stylist.getName() }}</a> &gt; Edit {{ stylist.getName() }}
+    </p>
+
+    <h1>Please enter your changes below</h1>
+
+    <div>
+      <form action="/stylists/{{ stylist.getId() }}" method="post">
+        <input type="hidden" name="_method" value="patch">
+
+        <label for="name">Enter name</label>
+        <input type="text" name="name" id="name" required>
+
+        <button type="submit">Update Name</button>
+      </form>
+    </div>
+  </body>
+</html>
