@@ -5,20 +5,21 @@
     <title>{{ stylist.getName() }}</title>
   </head>
   <body>
-    <h1>{{ stylist.getName() }}</h1>
-
     <p>
       <a href="/">Home</a> &gt; Stylist {{ stylist.getName() }}
     </p>
 
+    <h1>{{ stylist.getName() }} Client List</h1>
+
     <div>
       <form action="/add_client" method="post">
+        <input type="hidden" name="stylist_id" value="{{ stylist.getId() }}">
+
         <label for="client">Enter Client</label>
         <input type="text" name="client" id="client">
 
         <button type="submit">Add a Client</button>
       </form>
-
     </div>
 
     <hr>

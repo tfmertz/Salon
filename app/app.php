@@ -2,6 +2,7 @@
 
     require_once __DIR__.'/../vendor/autoload.php';
     require_once __DIR__.'/../src/Stylist.php';
+    require_once __DIR__.'/../src/Client.php';
     require_once __DIR__.'/../setup.config';
 
     $app = new Silex\Application();
@@ -13,6 +14,11 @@
 
     $app->get('/', function() use ($app) {
         return $app['twig']->render('homepage.twig', array('stylist_array' => Stylist::getAll()));
+    });
+
+    $app->post('delete_all', function() use ($app) {
+        Stylist::deleteAll();
+        return $app['twig']->render('homepage.twig', array('stylist_array' => []));
     });
 
     $app->post('add_stylist', function() use ($app) {
@@ -27,9 +33,13 @@
         return $app['twig']->render('view_stylist.twig', array('stylist' => $new_stylist, 'client_array' => $clients));
     });
 
-    $app->post('delete_all', function() use ($app) {
-        Stylist::deleteAll();
-        return $app['twig']->render('homepage.twig', array('stylist_array' => []));
+    $app->post('/add_client', function() use ($app) {
+        $stylist_id = pg_escape_string($_POST['stylist_id']);
+        $new_client = new Client(pg_escape_string($_POST['client']), $stylist_id);
+        $new_client->save();
+        $new_stylist = Stylist::find($stylist_id);
+        $clients = $new_stylist->getClients();
+        return $app['twig']->render('view_stylist.twig', array('stylist' => $new_stylist, 'client_array' => $clients));
     });
 
 
