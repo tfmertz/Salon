@@ -14,6 +14,20 @@
             Client::deleteAll();
         }
 
+        function test_delete()
+        {
+            //arrange
+            $new_client = new Client("Hillary", 0);
+            $new_client->save();
+
+            //act
+            $new_client->delete();
+            $result = Client::getAll();
+
+            //assert
+            $this->assertEquals([], $result);
+        }
+
         function test_update()
         {
             //arrange

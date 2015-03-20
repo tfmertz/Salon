@@ -70,6 +70,11 @@
             $this->setName($new_name);
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM clients * WHERE id = {$this->getId()};");
+        }
+
         static function getAll()
         {
             $rows = $GLOBALS['DB']->query("SELECT * FROM clients;");
