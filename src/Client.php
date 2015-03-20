@@ -50,6 +50,26 @@
             $this->setId($result['id']);
         }
 
+        function find($search_id)
+        {
+            $rows = $GLOBALS['DB']->query("SELECT * FROM clients WHERE id = {$search_id};");
+            $found_client = null;
+            foreach($rows as $row)
+            {
+                $id = $row['id'];
+                $name = $row['client'];
+                $stylist_id = $row['stylist_id'];
+                $found_client = new Client($name, $stylist_id, $id);
+            }
+            return $found_client;
+        }
+
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE clients SET client = '{$new_name}' WHERE id = {$this->getId()}");
+            $this->setName($new_name);
+        }
+
         static function getAll()
         {
             $rows = $GLOBALS['DB']->query("SELECT * FROM clients;");

@@ -14,6 +14,62 @@
             Client::deleteAll();
         }
 
+        function test_update()
+        {
+            //arrange
+            $new_client = new Client("Gregg", 1);
+            $new_client->save();
+
+            //act
+            $new_client->update("Greg");
+            $result = Client::find($new_client->getId());
+
+            //assert
+            $this->assertEquals("Greg", $result->getName());
+        }
+
+        function test_find()
+        {
+            //arrange
+            $new_client = new Client("Samantha", 0);
+            $new_client->save();
+
+            //act
+            $result = Client::find($new_client->getId());
+
+            //assert
+            $this->assertEquals($new_client, $result);
+        }
+
+        function test_deleteAll()
+        {
+            //arrange
+            $new_client = new Client("Johnny", 0);
+            $new_client->save();
+
+            //act
+            Client::deleteAll();
+            $result = Client::getAll();
+
+            //assert
+            $this->assertEquals([], $result);
+        }
+
+        function test_getAll()
+        {
+            //arrange
+            $new_client = new Client("Bob", 0);
+            $new_client->save();
+            $new_client2 = new Client("Larry", 0);
+            $new_client2->save();
+
+            //act
+            $result = Client::getAll();
+
+            //assert
+            $this->assertEquals([$new_client, $new_client2], $result);
+        }
+
         function test_save()
         {
             //arrange
