@@ -17,6 +17,20 @@
             Stylist::deleteAll();
         }
 
+        function test_delete()
+        {
+            //arrange
+            $new_stylist = new Stylist("Gregg");
+            $new_stylist->save();
+
+            //act
+            $new_stylist->delete();
+            $result = Stylist::getAll();
+
+            //assert
+            $this->assertEquals([], $result);
+        }
+
         function test_update()
         {
             //arrange
