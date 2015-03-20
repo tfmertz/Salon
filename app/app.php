@@ -42,6 +42,13 @@
         return $app['twig']->render('view_stylist.twig', array('stylist' => $new_stylist, 'client_array' => $clients));
     });
 
+    $app->post('delete_stylist', function() use ($app) {
+        $stylist_id = pg_escape_string($_POST['stylist_id']);
+        $new_stylist = Stylist::find($stylist_id);
+        $new_stylist->delete();
+        return $app['twig']->render('homepage.twig', array('stylist_array' => Stylist::getAll()));
+    });
+
 
     return $app;
 

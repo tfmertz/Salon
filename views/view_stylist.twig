@@ -9,8 +9,8 @@
       <a href="/">Home</a> &gt; Stylist {{ stylist.getName() }}
     </p>
 
-    <h1>{{ stylist.getName() }} Client List</h1>
 
+    <h1>Client List for {{ stylist.getName() }}</h1>
     <div>
       <form action="/add_client" method="post">
         <input type="hidden" name="stylist_id" value="{{ stylist.getId() }}">
@@ -40,6 +40,14 @@
         </p>
 
       {% endif %}
+    </div>
+
+    <div>
+      <form action="/delete_stylist" method="post">
+        <input type="hidden" name="stylist_id" value="{{ stylist.getId() }}">
+
+        <button type="submit">Delete stylist {{ stylist.getName() }}</button>
+      </form>
     </div>
   </body>
 </html>
