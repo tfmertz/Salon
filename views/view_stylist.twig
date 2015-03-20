@@ -3,49 +3,52 @@
 <html>
   <head>
     <title>{{ stylist.getName() }}</title>
+    <link rel="stylesheet" href="/css/skeleton.css" media="all">
   </head>
   <body>
-    <p>
-      <a href="/">Home</a> &gt; Stylist {{ stylist.getName() }}
-    </p>
-
-
-    <h1>Client List for {{ stylist.getName() }}</h1>
-    <div>
-      <form action="/stylists/add_client" method="post">
-        <input type="hidden" name="stylist_id" value="{{ stylist.getId() }}">
-
-        <label for="client">Enter Client</label>
-        <input type="text" name="client" id="client" required>
-
-        <button type="submit">Add a Client</button>
-      </form>
-    </div>
-
-    <hr>
-
-    <div>
-      <h3>{{ stylist.getName() }}&apos;s existing clients</h3>
-
-      {% for client in client_array %}
-        <p>
-          {{ client.getName() }}
-        </p>
-      {% endfor %}
-
-      {% if client_array is empty %}
-
-        <p>
-          <b>No clients exist</b>
-        </p>
-
-      {% endif %}
-    </div>
-
-    <div>
+    <div class="container">
       <p>
-        <a href="/stylists/{{ stylist.getId() }}/edit">Edit stylist {{ stylist.getName() }}</a>
+        <a href="/">Home</a> &gt; Stylist {{ stylist.getName() }}
       </p>
+
+
+      <h1>Client List for {{ stylist.getName() }}</h1>
+      <div>
+        <form action="/stylists/add_client" method="post">
+          <input type="hidden" name="stylist_id" value="{{ stylist.getId() }}">
+
+          <label for="client">Enter Client</label>
+          <input type="text" name="client" id="client" required>
+
+          <button type="submit">Add a Client</button>
+        </form>
+      </div>
+
+      <hr>
+
+      <div>
+        <h3>{{ stylist.getName() }}&apos;s existing clients</h3>
+
+        {% for client in client_array %}
+          <p>
+            {{ client.getName() }}
+          </p>
+        {% endfor %}
+
+        {% if client_array is empty %}
+
+          <p>
+            <b>No clients exist</b>
+          </p>
+
+        {% endif %}
+      </div>
+
+      <div>
+        <p>
+          <a href="/stylists/{{ stylist.getId() }}/edit">Edit stylist {{ stylist.getName() }}</a>
+        </p>
+      </div>
     </div>
   </body>
 </html>

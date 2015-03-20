@@ -3,36 +3,40 @@
 <html>
   <head>
     <title>Hair Salon</title>
+    <link rel="stylesheet" href="/css/skeleton.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
-    <h1>Welcome to Hair Salon</h1>
+    <div class="container">
 
-    <h3>A simple place to manage your growing business!</h3>
+      <h1>Welcome to Hair Salon</h1>
 
-    <div>
+      <h3>A simple place to manage your growing business!</h3>
+
       <form action="/add_stylist" method="post">
         <label for="stylist">Enter stylist name</label>
         <input type="text" name="stylist" id="stylist" required>
 
         <button type="submit">Add a Stylist</button>
       </form>
+
+      <form action="/delete_all" method="post">
+
+        <button type="submit">Delete all Stylists</button>
+      </form>
+
+      <hr>
+
+      <div>
+        {% for stylist in stylist_array %}
+          <p><a href="/stylists/{{ stylist.getId() }}">{{ stylist.getName() }}</a></p>
+        {% endfor %}
+
+        {% if stylist_array is empty %}
+          <p>There are no stylists added yet.</p>
+        {% endif %}
+      </div>
+
+
     </div>
-
-    <hr>
-
-    <div>
-      {% for stylist in stylist_array %}
-        <p><a href="/stylists/{{ stylist.getId() }}">{{ stylist.getName() }}</a></p>
-      {% endfor %}
-
-      {% if stylist_array is empty %}
-        <p>There are no stylists added yet.</p>
-      {% endif %}
-    </div>
-
-    <form action="/delete_all" method="post">
-
-      <button type="submit">Delete all Stylists</button>
-    </form>
   </body>
 </html>

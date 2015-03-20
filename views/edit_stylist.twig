@@ -3,32 +3,36 @@
 <html>
   <head>
     <title>Edit {{ stylist.getName() }}</title>
+    <link rel="stylesheet" href="/css/normalize.css" media="all">
+    <link rel="stylesheet" href="/css/skeleton.css" media="all">
   </head>
   <body>
+    <div class="container">
 
-    <p>
-      <a href="/">Home</a> &gt; <a href="/view_stylist/{{ stylist.getId() }}">{{ stylist.getName() }}</a> &gt; Edit {{ stylist.getName() }}
-    </p>
+      <p>
+        <a href="/">Home</a> &gt; <a href="/stylists/{{ stylist.getId() }}">{{ stylist.getName() }}</a> &gt; Edit {{ stylist.getName() }}
+      </p>
 
-    <h1>Please enter your changes below</h1>
+      <h1>Please enter your changes below</h1>
 
-    <div>
-      <form action="/stylists/{{ stylist.getId() }}" method="post">
-        <input type="hidden" name="_method" value="patch">
+      <div>
+        <form action="/stylists/{{ stylist.getId() }}" method="post">
+          <input type="hidden" name="_method" value="patch">
 
-        <label for="name">Enter name</label>
-        <input type="text" name="name" id="name" required>
+          <label for="name">Enter name</label>
+          <input type="text" name="name" id="name" required>
 
-        <button type="submit">Update Name</button>
-      </form>
-    </div>
+          <button type="submit">Update Name</button>
+        </form>
+      </div>
 
-    <div>
-      <form action="/stylists/{{ stylist.getId() }}" method="post">
-        <input type="hidden" name="_method" value="delete">
+      <div>
+        <form action="/stylists/{{ stylist.getId() }}" method="post">
+          <input type="hidden" name="_method" value="delete">
 
-        <button type="submit">Delete stylist {{ stylist.getName() }}</button>
-      </form>
+          <button type="submit">Delete stylist {{ stylist.getName() }}</button>
+        </form>
+      </div>
     </div>
   </body>
 </html>

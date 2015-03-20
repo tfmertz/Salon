@@ -7,6 +7,8 @@
 
     $app = new Silex\Application();
 
+    $app['debug'] = true;
+
     $DB = new PDO('pgsql:host=localhost;dbname=hair_salon', $DB_USER, $DB_PASS);
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/../views'));
