@@ -18,6 +18,27 @@
             Client::deleteAll();
         }
 
+        function test_delete_subClients()
+        {
+            //arrange
+            $new_stylist = new Stylist("Tammy");
+            $new_stylist->save();
+            $new_client = new Client("Rachel", $new_stylist->getId());
+            $new_client2 = new Client("Mark", $new_stylist->getId());
+            $new_client3 = new Client("Abe", 4);
+            $new_client->save();
+            $new_client2->save();
+            $new_client3->save();
+
+
+            //act
+            $new_stylist->delete();
+            $result = Client::getAll();
+
+            //assert
+            $this->assertEquals([$new_client3], $result);
+        }
+
         function test_getClients()
         {
             //arrange
