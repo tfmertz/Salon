@@ -6,7 +6,7 @@
     */
 
     require_once 'src/Stylist.php';
-    require 'setup.config'; //in .gitignore needed for database user and password
+    require 'setup.config'; //in .gitignore needed for database user and password look at setup.config.example for more information
 
     $DB = new PDO('pgsql:host=localhost;dbname=hair_salon_test', $DB_USER, $DB_PASS);
 
@@ -15,6 +15,21 @@
         function tearDown()
         {
             Stylist::deleteAll();
+        }
+
+        function test_find()
+        {
+            //arrange
+            $new_stylist = new Stylist("Denny");
+            $new_stylist->save();
+
+            //act
+            $id = $new_stylist->getId();
+            $result = Stylist::find($id);
+
+            //assert
+            $this->assertEquals($new_stylist, $result);
+
         }
 
         function test_getAll()

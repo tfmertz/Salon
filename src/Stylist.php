@@ -38,6 +38,20 @@
             $this->setId($results['id']);
         }
 
+        function find($search_id)
+        {
+            $rows = $GLOBALS['DB']->query("SELECT * FROM stylists WHERE id = {$search_id};");
+            $found_stylist = null;
+            foreach($rows as $row)
+            {
+                $id = $row['id'];
+                $name = $row['stylist'];
+                $new_stylist = new Stylist($name, $id);
+            }
+
+            return $new_stylist;
+        }
+
         static function getAll()
         {
             $rows = $GLOBALS['DB']->query("SELECT * FROM stylists;");
