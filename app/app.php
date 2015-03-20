@@ -55,7 +55,7 @@
     $app->patch('/stylists/{id}', function($id) use($app) {
         $new_stylist = Stylist::find($id);
         $new_stylist->update(pg_escape_string($_POST['name']));
-        return $app['twig']->render('view_stylist.twig', array('stylist' => $new_stylist));
+        return $app['twig']->render('view_stylist.twig', array('stylist' => $new_stylist, 'client_array' => $new_stylist->getClients()));
     });
 
     //GO TO EDIT PAGE
