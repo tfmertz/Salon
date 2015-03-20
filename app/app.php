@@ -6,14 +6,19 @@
 
     $app = new Silex\Application();
 
+    $DB = new PDO('pgsql:host=localhost;dbname=hair_salon', $DB_USER, $DB_PASS);
+
     $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/../views'));
 
+
     $app->get('/', function() use ($app) {
-        return $app['twig']->render('homepage.twig');
+        return $app['twig']->render('homepage.twig', array('stylist_array' => Stylist::getAll()));
     });
 
     $app->post('add_stylist', function() use ($app) {
-        return $app['twig']->render('homepage.twig');
+        $new_stylist = new Stylist(pg_escape_string($_POST['stylist']));
+        $new_stylist->save();
+        return $app['twig']->render('homepage.twig', array('stylist_array' => Stylist::getAll()));
     });
 
 
