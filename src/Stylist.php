@@ -103,6 +103,8 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM stylists *;");
+            //when we delete all stylists also delete all of the clients
+            $GLOBALS['DB']->exec("DELETE FROM clients *;");
         }
     }
 
