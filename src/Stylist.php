@@ -30,6 +30,34 @@
         {
             $this->id = $new_id;
         }
+
+        function save()
+        {
+            $GLOBALS['DB']->exec("INSERT INTO stylists (stylist) VALUES ('{$this->getName()}');");
+        }
+
+        static function getAll()
+        {
+            $rows = $GLOBALS['DB']->query("SELECT * FROM stylists;");
+
+            //Create a new array to store all our new Stylists
+            $stylists = array();
+            //loop through each row and create the stylist object with that row's info
+            foreach($rows as $row)
+            {
+                $id = $row['id'];
+                $name = $row['stylist'];
+                $new_stylist = new Stylist($name, $id);
+                array_push($stylists, $new_stylist);
+            }
+
+            return $stylists;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM stylists *;");
+        }
     }
 
  ?>
