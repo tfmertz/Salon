@@ -5,7 +5,7 @@
     # The setup.config file is set to be automatically ignored in the .gitignore
     # so your sensitive information will not be committed.
 
-    # If you don't require a username or pass then set these variables to
+    # If you don't require a username or pass then set these variables to a
     # blank string.
 
     $DB_USER = "<your username here>";
