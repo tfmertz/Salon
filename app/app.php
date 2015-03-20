@@ -6,9 +6,14 @@
 
     $app = new Silex\Application();
 
+    $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/../views'));
 
-    $app->get('/', function() {
-        return "Hello";
+    $app->get('/', function() use ($app) {
+        return $app['twig']->render('homepage.twig');
+    });
+
+    $app->post('add_stylist', function() use ($app) {
+        return $app['twig']->render('homepage.twig');
     });
 
 
