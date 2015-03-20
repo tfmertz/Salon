@@ -14,6 +14,7 @@
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
 
+    //GO TO HOMEPAGE
     $app->get('/', function() use ($app) {
         return $app['twig']->render('homepage.twig', array('stylist_array' => Stylist::getAll()));
     });
@@ -29,13 +30,13 @@
         return $app['twig']->render('homepage.twig', array('stylist_array' => Stylist::getAll()));
     });
 
-    $app->post('delete_stylist', function() use ($app) {
-        $stylist_id = pg_escape_string($_POST['stylist_id']);
-        $new_stylist = Stylist::find($stylist_id);
+    $app->delete('/stylists/{id}', function($id) use ($app) {
+        $new_stylist = Stylist::find($id);
         $new_stylist->delete();
         return $app['twig']->render('homepage.twig', array('stylist_array' => Stylist::getAll()));
     });
 
+    //GO TO STYLIST PAGE
     $app->get('/stylists/{id}', function($id) use ($app) {
         $new_stylist = Stylist::find($id);
         $clients = $new_stylist->getClients();
@@ -51,20 +52,18 @@
         return $app['twig']->render('view_stylist.twig', array('stylist' => $new_stylist, 'client_array' => $clients));
     });
 
-    $app->get('/stylists/{id}/edit', function($id) use ($app) {
-        $new_stylist = Stylist::find($id);
-
-        return $app['twig']->render('edit_stylist.twig', array('stylist' => $new_stylist));
-    });
-
     $app->patch('/stylists/{id}', function($id) use($app) {
         $new_stylist = Stylist::find($id);
         $new_stylist->update(pg_escape_string($_POST['name']));
         return $app['twig']->render('view_stylist.twig', array('stylist' => $new_stylist));
     });
 
+    //GO TO EDIT PAGE
+    $app->get('/stylists/{id}/edit', function($id) use ($app) {
+        $new_stylist = Stylist::find($id);
 
-
+        return $app['twig']->render('edit_stylist.twig', array('stylist' => $new_stylist));
+    });
 
     return $app;
 
