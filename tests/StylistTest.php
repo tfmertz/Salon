@@ -17,6 +17,21 @@
             Stylist::deleteAll();
         }
 
+        function test_update()
+        {
+            //arrange
+            $new_stylist = new Stylist("Hairy");
+            $new_stylist->save();
+
+            //act
+            $new_stylist->update("Harry");
+            $result = Stylist::find($new_stylist->getId());
+
+            //assert
+            $this->assertEquals("Harry", $result->getName());
+
+        }
+
         function test_find()
         {
             //arrange
