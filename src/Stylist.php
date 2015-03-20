@@ -33,7 +33,9 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO stylists (stylist) VALUES ('{$this->getName()}');");
+            $statement = $GLOBALS['DB']->query("INSERT INTO stylists (stylist) VALUES ('{$this->getName()}') RETURNING id;");
+            $results = $statement->fetch(PDO::FETCH_ASSOC);
+            $this->setId($results['id']);
         }
 
         static function getAll()

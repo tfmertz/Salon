@@ -11,6 +11,4 @@
     $DB_USER = ""; //your database username here
     $DB_PASS = ""; //your database password here
 
-
-
  ?>

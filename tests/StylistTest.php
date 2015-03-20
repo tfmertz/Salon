@@ -17,10 +17,27 @@
             Stylist::deleteAll();
         }
 
+        function test_getAll()
+        {
+            //arrange
+            $new_stylist = new Stylist("Karen");
+            $new_stylist->save();
+            $new_stylist2 = new Stylist("Mark");
+            $new_stylist2->save();
+
+            //act
+            $result = Stylist::getAll();
+
+            //assert
+            $this->assertEquals([$new_stylist, $new_stylist2], $result);
+
+
+        }
+
         function test_save()
         {
             //arrange
-            $new_stylist = new Stylist("Lauren", 1);
+            $new_stylist = new Stylist("Lauren");
 
             //act
             $new_stylist->save();
