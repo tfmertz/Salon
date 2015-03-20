@@ -22,9 +22,13 @@ Import the hair_salon.sql file into your postgres
 **If this fails, use the following commands:**
 
 CREATE DATABASE hair_salon;
+
 \c hair_salon
+
 CREATE TABLE stylists (id serial PRIMARY KEY, stylist varchar);
+
 CREATE TABLE clients (id serial PRIMARY KEY, client varchar, stylist_id int);
+
 CREATE DATABASE hair_salon_test WITH TEMPLATE hair_salon;
 
 The database should now be ready for testing.
