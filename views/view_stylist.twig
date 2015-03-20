@@ -47,13 +47,5 @@
         <a href="/stylists/{{ stylist.getId() }}/edit">Edit stylist {{ stylist.getName() }}</a>
       </p>
     </div>
-
-    <div>
-      <form action="/stylists/delete" method="post">
-        <input type="hidden" name="stylist_id" value="{{ stylist.getId() }}">
-
-        <button type="submit">Delete stylist {{ stylist.getName() }}</button>
-      </form>
-    </div>
   </body>
 </html>

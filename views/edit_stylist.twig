@@ -22,5 +22,13 @@
         <button type="submit">Update Name</button>
       </form>
     </div>
+
+    <div>
+      <form action="/stylists/{{ stylist.getId() }}" method="post">
+        <input type="hidden" name="_method" value="delete">
+
+        <button type="submit">Delete stylist {{ stylist.getName() }}</button>
+      </form>
+    </div>
   </body>
 </html>
