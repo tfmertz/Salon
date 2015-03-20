@@ -63,6 +63,23 @@
             $GLOBALS['DB']->exec("DELETE FROM stylists * WHERE id = {$this->getId()};");
         }
 
+        function getClients()
+        {
+            $rows = $GLOBALS['DB']->query("SELECT * FROM clients WHERE stylist_id = {$this->getId()};");
+            $clients = array();
+
+            foreach($rows as $row)
+            {
+                $id = $row['id'];
+                $name = $row['client'];
+                $stylist_id = $row['stylist_id'];
+                $new_client = new Client($name, $stylist_id, $id);
+                array_push($clients, $new_client);
+            }
+
+            return $clients;
+        }
+
         static function getAll()
         {
             $rows = $GLOBALS['DB']->query("SELECT * FROM stylists;");
