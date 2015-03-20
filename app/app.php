@@ -21,6 +21,11 @@
         return $app['twig']->render('homepage.twig', array('stylist_array' => Stylist::getAll()));
     });
 
+    $app->post('delete_all', function() use ($app) {
+        Stylist::deleteAll();
+        return $app['twig']->render('homepage.twig', array('stylist_array' => []));
+    });
+
 
     return $app;
 

@@ -17,5 +17,22 @@
         <button type="submit">Add a Stylist</button>
       </form>
     </div>
+
+    <hr>
+
+    <div>
+      {% for stylist in stylist_array %}
+        <p>{{ stylist.getName() }}</p>
+      {% endfor %}
+
+      {% if stylist_array is empty %}
+        <p>There are no stylists added yet.</p>
+      {% endif %}
+    </div>
+
+    <form action="/delete_all" method="post">
+
+      <button type="submit">Delete all Stylists</button>
+    </form>
   </body>
 </html>
