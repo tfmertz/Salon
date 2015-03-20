@@ -1,0 +1,16 @@
+<?php
+
+    # Once the repo is downloaded enter your username and password here
+    # and then change the name of this file to 'setup.config'
+    # The setup.config file is set to be automatically ignored in the .gitignore
+    # so your sensitive information will not be committed.
+
+    # If you don't require a username or pass then set these variables to
+    # blank string.
+
+    $DB_USER = "<your username here>";
+    $DB_PASS = "<your password here>";
+
+
+
+ ?>

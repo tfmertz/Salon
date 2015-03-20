@@ -12,6 +12,7 @@ The user of the app would be a hair salon owner. The app allows the user to inpu
 
 1. Clone the git repo
 2. Enter the commands outlined under _Database_ below to create your local pgsql database
+3. Follow the instructions in 'setup.config.example' to add database user/pass that won't be committed
 3. Navigate to the web folder and start a php server
 4. Load localhost:8000 in your browser
 
